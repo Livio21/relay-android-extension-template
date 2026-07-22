@@ -10,14 +10,18 @@ android {
         applicationId = "example.relay.source"
         minSdk = 23
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.0.2-test"
-        manifestPlaceholders["relayHostCertificateSha256"] = providers.gradleProperty("relayHostCertificateSha256")
-            .orElse("REPLACE_WITH_LOWERCASE_SHA256")
-            .get()
+        versionCode = 4
+        versionName = "1.1.0-test"
     }
 }
 
 kotlin {
     jvmToolchain(17)
+}
+
+dependencies {
+    // Relay loads this API from its own process. The extension must not package a duplicate copy.
+    compileOnly(files(providers.gradleProperty("relaySourceApiJar")
+        .orElse("../../relay-source-api/build/libs/relay-source-api.jar")
+        .get()))
 }

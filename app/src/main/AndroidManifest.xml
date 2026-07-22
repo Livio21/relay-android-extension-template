@@ -1,14 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application android:label="Example Relay Source">
-        <!-- Replace both values with the package and signing-certificate digest of your Relay build. -->
-        <meta-data android:name="relay.host.package" android:value="dev.relay.music" />
-        <meta-data android:name="relay.host.certificateSha256" android:value="${relayHostCertificateSha256}" />
-        <service
-            android:name=".RelayExtensionService"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="dev.relay.music.EXTENSION" />
-            </intent-filter>
-        </service>
+        <!-- Relay verifies the APK signer against the signed repository catalog before loading this class. -->
+        <meta-data android:name="relay.source.api" android:value="1" />
+        <meta-data android:name="relay.source.class" android:value=".DemoRelaySourceFactory" />
     </application>
 </manifest>
