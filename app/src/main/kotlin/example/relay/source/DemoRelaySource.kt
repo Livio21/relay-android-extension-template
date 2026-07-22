@@ -8,7 +8,7 @@ import dev.relay.music.source.api.RelaySourceTrack
 
 /**
  * A small Mihon-style source: Relay instantiates this class from the installed APK and invokes
- * it directly. Real sources make their own authenticated API requests or parse their sites here.
+ * it directly. Real sources use a documented provider API or parse the provider's accessible pages here.
  */
 class DemoRelaySourceFactory : RelaySourceFactory {
     override fun getApiVersion() = RelaySourceApi.VERSION

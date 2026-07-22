@@ -19,7 +19,7 @@ The committed catalog is a debug-only test release. Replace its APK URL, size, A
 
 Relay reads `relay.source.api` and `relay.source.class` from the extension manifest, verifies API version 1, creates a child-first APK class loader, then instantiates the declared class. Relay's source API itself is parent-loaded so the extension must use it as a `compileOnly` dependency and must not package a second copy.
 
-The source owns its own HTTP API requests, authentication, and site parsing. It returns normalised track records to Relay; it never writes Relay's database or controls playback directly. The included demo source exposes three short test streams so browsing, search, and playback can be checked before building a real provider.
+The source owns its own HTTP API requests, authentication, and site parsing. Prefer a provider's documented API; otherwise parse only pages the user may normally access. Do not bypass authentication, subscriptions, DRM, rate limits, or access controls. Return normalised track records to Relay; never write Relay's database or control playback directly. The included demo source exposes three short test streams so browsing, search, and playback can be checked before building a real provider.
 
 Relay sends plain text for an all-field search and `title:`, `artist:`, or `album:` prefixes for field searches. Empty text is always a browse request.
 
