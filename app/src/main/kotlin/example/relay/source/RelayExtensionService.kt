@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.IBinder
 import android.os.Parcel
 import java.security.MessageDigest
+import org.json.JSONArray
 import org.json.JSONObject
 
 /** Minimal Relay source extension: one bounded JSON request/reply over an explicit Binder service. */
@@ -22,13 +23,13 @@ class RelayExtensionService : Service() {
             val result = when (requestJson.optString("method")) {
                 "handshake" -> JSONObject()
                     .put("id", "example.relay.source")
-                    .put("version", "1.0.1-test")
+                    .put("version", "1.0.2-test")
                     .put("kind", "SOURCE")
                     .put("api", JSONObject().put("minimum", 1).put("maximum", 1))
-                    .put("capabilities", listOf("browse"))
-                    .put("permissions", listOf("NETWORK"))
+                    .put("capabilities", JSONArray().put("browse"))
+                    .put("permissions", JSONArray().put("NETWORK"))
                     .put("settingsSchemaVersion", 1)
-                    .put("authentication", listOf("NONE"))
+                    .put("authentication", JSONArray().put("NONE"))
                 "browse" -> JSONObject().put("tracks", emptyList<Any>())
                 else -> null
             }
