@@ -8,7 +8,7 @@
       "version": "1.0.0-test",
       "kind": "SOURCE",
       "api": { "minimum": 1, "maximum": 1 },
-      "artifactUrl": "https://github.com/Livio21/relay-android-extension-template/releases/download/v0.1.0-test/example.relay.source.apk",
+      "artifactUrl": "https://github.com/Livio21/relay-android-extension-template/releases/download/v0.1.0-test/app-debug.apk",
       "sha256": "23792932dc95b18995adb499121106ba6103f18e39b60be0fd2f24f8cf593fa5",
       "artifactSizeBytes": 857309,
       "permissions": ["NETWORK"],
