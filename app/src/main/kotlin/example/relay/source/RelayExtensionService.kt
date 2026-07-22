@@ -22,7 +22,7 @@ class RelayExtensionService : Service() {
             val result = when (requestJson.optString("method")) {
                 "handshake" -> JSONObject()
                     .put("id", "example.relay.source")
-                    .put("version", "1.0.0")
+                    .put("version", "1.0.1-test")
                     .put("kind", "SOURCE")
                     .put("api", JSONObject().put("minimum", 1).put("maximum", 1))
                     .put("capabilities", listOf("browse"))
@@ -45,8 +45,12 @@ class RelayExtensionService : Service() {
     }
 
     private fun trustedRelayCaller(): Boolean {
-        val hostPackage = applicationInfo.metaData?.getString("relay.host.package").orEmpty()
-        val expectedCertificate = applicationInfo.metaData?.getString("relay.host.certificateSha256").orEmpty()
+        @Suppress("DEPRECATION")
+        val metadata = runCatching {
+            packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData
+        }.getOrNull()
+        val hostPackage = metadata?.getString("relay.host.package").orEmpty()
+        val expectedCertificate = metadata?.getString("relay.host.certificateSha256").orEmpty()
         if (hostPackage.isBlank() || !expectedCertificate.matches(Regex("[0-9a-f]{64}"))) return false
         val callerPackages = packageManager.getPackagesForUid(Binder.getCallingUid()).orEmpty()
         if (hostPackage !in callerPackages) return false

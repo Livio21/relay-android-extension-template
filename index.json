@@ -5,12 +5,12 @@
     {
       "id": "example.relay.source",
       "name": "Example Relay Android Source (debug)",
-      "version": "1.0.0-test",
+      "version": "1.0.1-test",
       "kind": "SOURCE",
       "api": { "minimum": 1, "maximum": 1 },
-      "artifactUrl": "https://github.com/Livio21/relay-android-extension-template/releases/download/v0.1.0-test/app-debug.apk",
-      "sha256": "23792932dc95b18995adb499121106ba6103f18e39b60be0fd2f24f8cf593fa5",
-      "artifactSizeBytes": 857309,
+      "artifactUrl": "https://github.com/Livio21/relay-android-extension-template/releases/download/v0.1.1-test/app-debug.apk",
+      "sha256": "c8f2c663c8d2cd3d24f6a42349af92e281e922eed7728f35ca41e812c80f2175",
+      "artifactSizeBytes": 852287,
       "permissions": ["NETWORK"],
       "androidPackageName": "example.relay.source",
       "androidSigningCertificateSha256": "fb23fc61c3fba3fa6eb2996c922f14e0a6aaa451f1e42c69341956fadda5ebc2"

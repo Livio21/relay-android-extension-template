@@ -10,8 +10,8 @@ android {
         applicationId = "example.relay.source"
         minSdk = 23
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1-test"
         manifestPlaceholders["relayHostCertificateSha256"] = providers.gradleProperty("relayHostCertificateSha256")
             .orElse("REPLACE_WITH_LOWERCASE_SHA256")
             .get()
