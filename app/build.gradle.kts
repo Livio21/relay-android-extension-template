@@ -10,8 +10,8 @@ android {
         applicationId = "example.relay.source"
         minSdk = 23
         targetSdk = 36
-        versionCode = 4
-        versionName = "1.1.0-test"
+        versionCode = 5
+        versionName = "1.1.1-test"
     }
 }
 

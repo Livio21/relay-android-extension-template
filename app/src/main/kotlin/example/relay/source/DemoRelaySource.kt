@@ -21,9 +21,19 @@ private class DemoRelaySource : RelaySource {
     override fun getName() = "Relay demo music"
 
     override fun search(query: String): RelaySourcePage {
+        val (field, term) = when {
+            query.startsWith("title:", ignoreCase = true) -> "title" to query.substringAfter(':')
+            query.startsWith("artist:", ignoreCase = true) -> "artist" to query.substringAfter(':')
+            query.startsWith("album:", ignoreCase = true) -> "album" to query.substringAfter(':')
+            else -> "all" to query
+        }
         val matches = demoTracks.filter { track ->
-            query.isBlank() || listOf(track.title, track.artist, track.album.orEmpty())
-                .any { it.contains(query, ignoreCase = true) }
+            term.isBlank() || when (field) {
+                "title" -> track.title.contains(term, ignoreCase = true)
+                "artist" -> track.artist.contains(term, ignoreCase = true)
+                "album" -> track.album.orEmpty().contains(term, ignoreCase = true)
+                else -> listOf(track.title, track.artist, track.album.orEmpty()).any { it.contains(term, ignoreCase = true) }
+            }
         }
         return RelaySourcePage(matches)
     }

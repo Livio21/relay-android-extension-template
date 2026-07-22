@@ -21,4 +21,6 @@ Relay reads `relay.source.api` and `relay.source.class` from the extension manif
 
 The source owns its own HTTP API requests, authentication, and site parsing. It returns normalised track records to Relay; it never writes Relay's database or controls playback directly. The included demo source exposes three short test streams so browsing, search, and playback can be checked before building a real provider.
 
+Relay sends plain text for an all-field search and `title:`, `artist:`, or `album:` prefixes for field searches. Empty text is always a browse request.
+
 Because trusted source code runs in Relay's process, only add repositories whose signing keys you trust. Relay keeps an APK disabled if its signer, source metadata, API version, or entry class fails validation.
