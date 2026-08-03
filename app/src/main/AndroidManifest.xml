@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-feature android:name="dev.relay.music.source.extension" android:required="false" />
+
     <application android:label="Example Relay Source">
         <!-- Relay verifies the APK signer against the signed repository catalog before loading this class. -->
-        <meta-data android:name="relay.source.api" android:value="1" />
+        <meta-data android:name="relay.source.api" android:value="2" />
+        <meta-data android:name="relay.source.id" android:value="example.relay.source" />
         <meta-data android:name="relay.source.class" android:value=".DemoRelaySourceFactory" />
     </application>
 </manifest>

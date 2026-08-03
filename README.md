@@ -5,7 +5,7 @@ This is a standalone, separately installed Android **source extension** using Re
 ## Before building
 
 1. Replace `example.relay.source` everywhere with your stable package and extension ID.
-2. Implement `RelaySource` or `RelaySourceFactory` and declare it in `relay.source.class` in `app/src/main/AndroidManifest.xml`.
+2. Implement `RelaySource` or `RelaySourceFactory`; set the same stable ID in `relay.source.id` and the signed catalog, then declare its class in `relay.source.class`.
 3. Set the same extension package name and APK certificate digest in the signed Relay repository catalog's `androidPackageName` and `androidSigningCertificateSha256` fields.
 4. Build Relay's source API first, then build the extension with JDK 17: `../gradlew :relay-source-api:jar` followed by `../gradlew -p relay-android-extension-template :app:assembleDebug`.
 
@@ -17,7 +17,7 @@ The committed catalog is a debug-only test release. Replace its APK URL, size, A
 
 ## Source API contract
 
-Relay reads `relay.source.api` and `relay.source.class` from the extension manifest, verifies API version 1, creates a child-first APK class loader, then instantiates the declared class. Relay's source API itself is parent-loaded so the extension must use it as a `compileOnly` dependency and must not package a second copy.
+Relay reads `relay.source.api`, `relay.source.id`, and `relay.source.class` from the extension manifest, verifies the API version and catalog identity, creates a child-first APK class loader, then instantiates the declared class. The `dev.relay.music.source.extension` feature marks the APK for source-extension tooling. Relay's source API itself is parent-loaded so the extension must use it as a `compileOnly` dependency and must not package a second copy.
 
 The source owns its own HTTP API requests, authentication, and site parsing. Prefer a provider's documented API; otherwise parse only pages the user may normally access. Do not bypass authentication, subscriptions, DRM, rate limits, or access controls. Return normalised track records to Relay; never write Relay's database or control playback directly. The included demo source exposes three short test streams so browsing, search, and playback can be checked before building a real provider.
 
